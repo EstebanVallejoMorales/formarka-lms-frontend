@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Course } from '../models/course.model';
+import { Course, Resource } from '../models/course.model';
 import { delay } from 'rxjs/operators';
 
+/**
+ * Course Service
+ * 
+ * Provides mock data for courses and handles course-related operations.
+ * 
+ * NOTE: This service currently uses mock data for demonstration purposes.
+ * In a production environment, these methods would use HttpClient
+ * to communicate with a backend API for course data and progress tracking.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +38,7 @@ export class CourseService {
               type: 'video',
               contentUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
               duration: '05:20',
-              isCompleted: true,
+              isCompleted: true, // This will be overwritten by progress tracking
               resources: [
                 { id: 'r1', title: 'Guía de Branding PDF', url: '#', type: 'pdf' },
                 { id: 'r2', title: 'Plantillas de Diseño', url: '#', type: 'zip' }
@@ -99,56 +108,74 @@ export class CourseService {
   ];
 
   private PROGRESS_KEY = 'f-lms-progress';
+  private LAST_ACTIVITY_KEY = 'f-lms-last-activity';
 
+  /**
+   * Fetches all courses, injecting current progress for each lesson.
+   */
   getCourses(): Observable<Course[]> {
-    // Inject progress into courses
-    const progress = this.getAllProgress();
-    const coursesWithProgress = this.mockCourses.map(course => {
-      if (course.modules) {
-        course.modules.forEach(m => {
-          m.lessons.forEach(l => {
-            l.isCompleted = progress[`${course.id}_${l.id}`] || false;
-          });
-        });
-      }
-      return course;
-    });
-    return of(coursesWithProgress).pipe(delay(500));
+    console.log('Mock: Fetching all courses.');
+    // Simulate API call
+    // const API_ENDPOINT = '/api/courses'; // Example backend endpoint
+    // return this.http.get<Course[]>(API_ENDPOINT).pipe(
+    //   map(courses => this.injectProgress(courses)),
+    //   delay(500)
+    // );
+
+    const coursesWithProgress = this.injectProgress(this.mockCourses);
+    return of(coursesWithProgress).pipe(delay(500)); // Simulate network delay
   }
 
+  /**
+   * Fetches a single course by ID, injecting its progress.
+   */
   getCourse(id: string): Observable<Course | undefined> {
+    console.log(`Mock: Fetching course with ID: ${id}`);
     const course = this.mockCourses.find(c => c.id === id);
+    
+    // Simulate API call
+    // const API_ENDPOINT = `/api/courses/${id}`; // Example backend endpoint
+    // return this.http.get<Course>(API_ENDPOINT).pipe(
+    //   map(courseData => this.injectProgress([courseData])[0]),
+    //   delay(500)
+    // );
+
     if (course) {
-      const progress = this.getAllProgress();
-      if (course.modules) {
-        course.modules.forEach(m => {
-          m.lessons.forEach(l => {
-            l.isCompleted = progress[`${course.id}_${l.id}`] || false;
-          });
-        });
-      }
+      const courseWithProgress = this.injectProgress([course])[0];
+      return of(courseWithProgress).pipe(delay(500)); // Simulate network delay
     }
-    return of(course).pipe(delay(500));
+    return of(undefined).pipe(delay(500));
   }
 
+  /**
+   * Marks a lesson as completed and saves progress to localStorage.
+   * Also updates last activity timestamp.
+   */
   completeLesson(courseId: string, lessonId: string): void {
+    console.log(`Mock: Completing lesson ${lessonId} in course ${courseId}.`);
     const progress = this.getAllProgress();
     progress[`${courseId}_${lessonId}`] = true;
     localStorage.setItem(this.PROGRESS_KEY, JSON.stringify(progress));
     
     // Also save last activity
-    localStorage.setItem('f-lms-last-activity', JSON.stringify({
+    localStorage.setItem(this.LAST_ACTIVITY_KEY, JSON.stringify({
       courseId,
       lessonId,
       timestamp: new Date().toISOString()
     }));
   }
 
+  /**
+   * Retrieves all saved progress data from localStorage.
+   */
   private getAllProgress(): { [key: string]: boolean } {
     const data = localStorage.getItem(this.PROGRESS_KEY);
     return data ? JSON.parse(data) : {};
   }
 
+  /**
+   * Calculates the completion percentage for a given course.
+   */
   getCourseProgress(courseId: string): number {
     const course = this.mockCourses.find(c => c.id === courseId);
     if (!course || !course.modules) return 0;
@@ -160,15 +187,55 @@ export class CourseService {
     course.modules.forEach(m => {
       m.lessons.forEach(l => {
         totalLessons++;
-        if (progress[`${courseId}_${l.id}`]) completedLessons++;
+        if (progress[`${courseId}_${l.id}`]) {
+          completedLessons++;
+        }
       });
     });
 
     return totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
   }
+  
+  /**
+   * Retrieves the last activity data.
+   */
+  getLastActivity(): Observable<{ courseId: string; lessonId: string; timestamp: string } | null> {
+    console.log('Mock: Fetching last activity.');
+    const data = localStorage.getItem(this.LAST_ACTIVITY_KEY);
+    // Simulate API call
+    // return this.http.get<{ courseId: string; lessonId: string; timestamp: string } | null>('/api/learning/last-activity').pipe(
+    //   delay(300)
+    // );
+    return of(data ? JSON.parse(data) : null).pipe(delay(300)); // Simulate network delay
+  }
 
+  /**
+   * Mocks course enrollment.
+   */
   enroll(courseId: string): Observable<boolean> {
-    console.log('Enrolling in course:', courseId);
-    return of(true).pipe(delay(1000));
+    console.log(`Mock: Enrolling in course: ${courseId}`);
+    // Simulate API call
+    // const API_ENDPOINT = '/api/learning/enroll'; // Example backend endpoint
+    // return this.http.post<boolean>(API_ENDPOINT, { courseId }).pipe(
+    //   delay(1000)
+    // );
+    return of(true).pipe(delay(1000)); // Simulate network delay
+  }
+
+  /**
+   * Helper to inject current progress into a list of courses.
+   */
+  private injectProgress(courses: Course[]): Course[] {
+    const progress = this.getAllProgress();
+    return courses.map(course => {
+      if (course.modules) {
+        course.modules.forEach(m => {
+          m.lessons.forEach(l => {
+            l.isCompleted = progress[`${course.id}_${l.id}`] || false;
+          });
+        });
+      }
+      return course;
+    });
   }
 }

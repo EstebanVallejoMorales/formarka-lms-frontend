@@ -12,7 +12,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
     <header class="header">
       <div class="container header-content">
         <div class="logo-area" routerLink="/">
-          <img src="assets/logo.png" alt="Formarka Logo" class="logo" onerror="this.src='https://via.placeholder.com/120x40?text=FORMARKA'">
+          <img src="logo.png" alt="Formarka Logo" class="logo" onerror="this.src='https://placehold.co/120x40/1a1a1a/f4f4f4?text=FORMARKA'">
         </div>
         
         <nav class="nav">
@@ -25,7 +25,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
           <ng-container *ngIf="authService.currentUser() as user; else guest">
             <div class="user-profile">
               <span class="user-name">{{ user.name }}</span>
-              <img [src]="user.photoUrl || 'assets/default-avatar.png'" class="avatar" onerror="this.src='https://via.placeholder.com/40'">
+              <img [src]="user.photoUrl || 'default-avatar.png'" class="avatar" onerror="this.src='default-avatar.png'">
               <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
             </div>
           </ng-container>
