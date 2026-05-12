@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+/* Formarka LMS - Brand Identity & Global Styles */
+:root {
+  /* Brand Colors - Easily customizable */
+  --formarka-primary: #1a1a1a;    /* Sobriety - Dark */
+  --formarka-secondary: #f4f4f4;  /* Background - Light */
+  --formarka-accent: #d4af37;     /* Premium feel - Gold/Accent */
+  --formarka-text: #333333;
+  --formarka-text-muted: #666666;
+  --formarka-white: #ffffff;
+  
+  /* Layout */
+  --sidebar-width: 300px;
+  --header-height: 64px;
+  
+  /* Fonts */
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--formarka-secondary);
+  color: var(--formarka-text);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  color: var(--formarka-primary);
+  font-weight: 700;
+}
+
+/* Scrollbar styling for a modern look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--formarka-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}

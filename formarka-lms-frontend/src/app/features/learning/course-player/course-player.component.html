@@ -1,0 +1,60 @@
+<div class="player-container" *ngIf="course">
+  <!-- Sidebar for course navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-container">
+        <span class="brand-logo">FORMARKA</span>
+      </div>
+      <h2>{{ course.title }}</h2>
+      <p class="progress-info">Tu progreso: 20% completado</p>
+    </div>
+
+    <div class="modules-list">
+      <div *ngFor="let module of course.modules" class="module-item">
+        <div class="module-title" (click)="toggleModule(module)">
+          <span>{{ module.title }}</span>
+          <span>{{ module.isOpen ? '▲' : '▼' }}</span>
+        </div>
+        
+        <ul class="lessons-list" *ngIf="module.isOpen">
+          <li 
+            *ngFor="let lesson of module.lessons" 
+            class="lesson-item"
+            [class.active]="currentLesson?.id === lesson.id"
+            (click)="selectLesson(lesson)"
+          >
+            <div class="status-icon" [class.completed]="lesson.isCompleted">
+              <span *ngIf="lesson.isCompleted">✓</span>
+            </div>
+            <span>{{ lesson.title }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content area -->
+  <main class="main-content">
+    <!-- Video Section -->
+    <section class="video-section" *ngIf="currentLesson?.type === 'video'">
+      <iframe 
+        *ngIf="currentLesson?.contentUrl"
+        [src]="currentLesson!.contentUrl! | safe" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+      ></iframe>
+    </section>
+
+    <!-- Lesson Info Section -->
+    <section class="content-info">
+      <h1>{{ currentLesson?.title }}</h1>
+      <p>Bienvenido a esta lección. Aquí aprenderás conceptos clave para fortalecer tu marca.</p>
+      
+      <div class="actions">
+        <button class="btn btn-primary" (click)="markAsCompleted()">Marcar como completada</button>
+        <button class="btn btn-outline">Siguiente lección →</button>
+      </div>
+    </section>
+  </main>
+</div>
