@@ -125,6 +125,12 @@
   max-height: 70vh;
 }
 
+.quiz-section {
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #eee;
+}
+
 iframe {
   width: 100%;
   height: 100%;
@@ -139,7 +145,74 @@ iframe {
 
 .content-info h1 {
   font-size: 2rem;
-  margin-bottom: 16px;
+}
+
+.header-with-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-with-actions .actions {
+  margin: 0;
+}
+
+.resources-container {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+}
+
+.resources-container h3 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.resource-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--formarka-text);
+  border: 1px solid #eee;
+  transition: all 0.2s;
+}
+
+.resource-item:hover {
+  background: #fff;
+  border-color: var(--formarka-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.res-icon {
+  font-size: 1.5rem;
+}
+
+.res-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.res-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.res-type {
+  font-size: 0.75rem;
+  color: var(--formarka-text-muted);
+  font-weight: 700;
 }
 
 .actions {

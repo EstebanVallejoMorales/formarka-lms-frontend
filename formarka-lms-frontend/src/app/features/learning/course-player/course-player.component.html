@@ -2,11 +2,11 @@
   <!-- Sidebar for course navigation -->
   <aside class="sidebar">
     <div class="sidebar-header">
-      <div class="logo-container">
+      <div class="logo-container" routerLink="/courses" style="cursor: pointer;">
         <span class="brand-logo">FORMARKA</span>
       </div>
       <h2>{{ course.title }}</h2>
-      <p class="progress-info">Tu progreso: 20% completado</p>
+      <p class="progress-info">Tu progreso: {{ courseService.getCourseProgress(course.id) }}% completado</p>
     </div>
 
     <div class="modules-list">
@@ -46,14 +46,36 @@
       ></iframe>
     </section>
 
+    <!-- Quiz Section -->
+    <section class="quiz-section" *ngIf="currentLesson?.type === 'quiz' && currentLesson?.quiz">
+      <app-quiz [quiz]="currentLesson!.quiz!" (onComplete)="markAsCompleted()"></app-quiz>
+    </section>
+
     <!-- Lesson Info Section -->
     <section class="content-info">
-      <h1>{{ currentLesson?.title }}</h1>
+      <div class="header-with-actions">
+        <h1>{{ currentLesson?.title }}</h1>
+        <div class="actions">
+          <button class="btn btn-primary" (click)="markAsCompleted()" [disabled]="currentLesson?.isCompleted">
+            {{ currentLesson?.isCompleted ? 'Completada ✓' : 'Marcar como completada' }}
+          </button>
+        </div>
+      </div>
+      
       <p>Bienvenido a esta lección. Aquí aprenderás conceptos clave para fortalecer tu marca.</p>
       
-      <div class="actions">
-        <button class="btn btn-primary" (click)="markAsCompleted()">Marcar como completada</button>
-        <button class="btn btn-outline">Siguiente lección →</button>
+      <!-- Resources Section -->
+      <div class="resources-container" *ngIf="currentLesson?.resources && currentLesson!.resources!.length > 0">
+        <h3>Recursos descargables</h3>
+        <div class="resource-list">
+          <a *ngFor="let res of currentLesson?.resources" [href]="res.url" class="resource-item" target="_blank">
+            <span class="res-icon">{{ res.type === 'pdf' ? '📄' : '📦' }}</span>
+            <div class="res-info">
+              <span class="res-title">{{ res.title }}</span>
+              <span class="res-type">{{ res.type | uppercase }}</span>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
   </main>

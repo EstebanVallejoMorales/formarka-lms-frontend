@@ -1,0 +1,40 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <img src="assets/logo.png" alt="Formarka Logo" class="logo" onerror="this.src='https://via.placeholder.com/150x50?text=FORMARKA'">
+      <h1>Bienvenido de nuevo</h1>
+      <p>Ingresa a tu cuenta para continuar aprendiendo</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <app-form-field
+        label="Correo Electrónico"
+        [control]="getEmailControl()"
+        type="email"
+        placeholder="tu@email.com">
+      </app-form-field>
+
+      <app-form-field
+        label="Contraseña"
+        [control]="getPasswordControl()"
+        type="password"
+        placeholder="••••••••">
+      </app-form-field>
+
+      <div class="auth-actions">
+        <a routerLink="/auth/forgot-password" class="forgot-password">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <app-button 
+        type="submit" 
+        [loading]="isLoading" 
+        [disabled]="loginForm.invalid">
+        Iniciar Sesión
+      </app-button>
+    </form>
+
+    <div class="auth-footer">
+      <p>¿No tienes una cuenta? <a routerLink="/auth/register">Regístrate aquí</a></p>
+    </div>
+  </div>
+</div>
