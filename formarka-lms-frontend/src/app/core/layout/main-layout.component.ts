@@ -33,11 +33,13 @@ import { HeaderComponent } from './header/header.component';
     }
 
     .footer {
-      background: var(--formarka-primary);
+      background: var(--formarka-bg-dark);
       color: var(--formarka-white);
-      padding: 30px 0;
+      padding: 48px 0;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      border-top: 4px solid var(--formarka-primary);
+      font-family: var(--font-main);
     }
   `]
 })

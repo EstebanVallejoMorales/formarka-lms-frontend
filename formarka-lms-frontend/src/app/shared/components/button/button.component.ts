@@ -17,8 +17,8 @@ import { CommonModule } from '@angular/common';
   `,
   styles: [`
     .btn {
-      padding: 12px 24px;
-      border-radius: 8px;
+      padding: 12px 32px;
+      border-radius: 50px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -29,6 +29,7 @@ import { CommonModule } from '@angular/common';
       font-size: 1rem;
       width: 100%;
       min-height: 48px;
+      font-family: var(--font-main);
     }
 
     .btn:disabled {
@@ -37,12 +38,15 @@ import { CommonModule } from '@angular/common';
     }
 
     .btn-primary {
-      background-color: var(--formarka-primary);
+      background: linear-gradient(90deg, var(--formarka-primary), var(--formarka-accent));
       color: var(--formarka-white);
+      box-shadow: 0 4px 15px rgba(128, 18, 246, 0.2);
     }
 
     .btn-primary:hover:not(:disabled) {
-      background-color: #333;
+      background: linear-gradient(90deg, var(--formarka-accent), var(--formarka-primary));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(128, 18, 246, 0.3);
     }
 
     .btn-outline {

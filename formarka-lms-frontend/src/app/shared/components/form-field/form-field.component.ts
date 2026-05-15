@@ -28,42 +28,47 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
   `,
   styles: [`
     .form-field {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       width: 100%;
     }
 
     .label {
       display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: var(--formarka-primary);
-      font-size: 0.9rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: var(--formarka-text);
+      font-size: 0.95rem;
+      font-family: var(--font-main);
     }
 
     .input {
       width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      padding: 14px 20px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
       font-size: 1rem;
-      transition: border-color 0.3s ease;
+      transition: all 0.3s ease;
       background-color: var(--formarka-white);
+      font-family: var(--font-main);
+      color: var(--formarka-text);
     }
 
     .input:focus {
       outline: none;
-      border-color: var(--formarka-accent);
-      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+      border-color: var(--formarka-primary);
+      box-shadow: 0 0 0 4px rgba(128, 18, 246, 0.1);
+      background-color: #fff;
     }
 
     .input.error {
-      border-color: #e74c3c;
+      border-color: #ef4444;
     }
 
     .error-message {
-      color: #e74c3c;
-      font-size: 0.8rem;
-      margin-top: 4px;
+      color: #ef4444;
+      font-size: 0.85rem;
+      margin-top: 6px;
+      font-weight: 500;
     }
   `]
 })

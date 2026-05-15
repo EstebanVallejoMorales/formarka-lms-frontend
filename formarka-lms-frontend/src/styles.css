@@ -1,19 +1,21 @@
 /* Formarka LMS - Brand Identity & Global Styles */
 :root {
-  /* Brand Colors - Easily customizable */
-  --formarka-primary: #1a1a1a;    /* Sobriety - Dark */
-  --formarka-secondary: #f4f4f4;  /* Background - Light */
-  --formarka-accent: #d4af37;     /* Premium feel - Gold/Accent */
-  --formarka-text: #333333;
+  /* Brand Colors - Formarka Style */
+  --formarka-primary: #8012f6;    /* Purple */
+  --formarka-secondary: #54f200;  /* Green */
+  --formarka-accent: #e3c505;     /* Gold/Yellow */
+  --formarka-bg-dark: #1a1a1a;
+  --formarka-bg-light: #f8f2ff;
+  --formarka-text: #2e2e2e;
   --formarka-text-muted: #666666;
   --formarka-white: #ffffff;
   
   /* Layout */
   --sidebar-width: 300px;
-  --header-height: 64px;
+  --header-height: 72px;
   
   /* Fonts */
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-main: 'Plus Jakarta Sans', sans-serif;
 }
 
 * {
@@ -24,37 +26,40 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--formarka-secondary);
+  background-color: var(--formarka-bg-light);
   color: var(--formarka-text);
-  line-height: 1.6;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
-  color: var(--formarka-primary);
+  color: var(--formarka-text);
   font-weight: 700;
+  line-height: 1.25;
 }
 
 /* Scrollbar styling for a modern look */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--formarka-secondary);
+  background: var(--formarka-bg-light);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
+  background: var(--formarka-primary);
+  border-radius: 5px;
+  border: 2px solid var(--formarka-bg-light);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
+  background: #6a0ed1;
 }
 
 /* Utility classes */
 .container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 0 20px;
 }

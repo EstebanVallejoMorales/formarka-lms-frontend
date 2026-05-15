@@ -31,23 +31,24 @@ import { ButtonComponent } from '../button/button.component';
   styles: [`
     .course-card {
       background: var(--formarka-white);
-      border-radius: 12px;
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       height: 100%;
+      border: 1px solid rgba(128, 18, 246, 0.1);
     }
 
     .course-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(128, 18, 246, 0.12);
     }
 
     .card-image {
       position: relative;
-      height: 180px;
+      height: 200px;
     }
 
     .card-image img {
@@ -58,18 +59,20 @@ import { ButtonComponent } from '../button/button.component';
 
     .category {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(26, 26, 26, 0.8);
+      top: 16px;
+      right: 16px;
+      background: var(--formarka-primary);
       color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .card-content {
-      padding: 20px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -79,41 +82,44 @@ import { ButtonComponent } from '../button/button.component';
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     .level {
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.7rem;
+      font-weight: 800;
       text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 4px;
+      padding: 4px 10px;
+      border-radius: 50px;
     }
 
-    .level.básico { background: #e3f2fd; color: #1976d2; }
-    .level.intermedio { background: #fff3e0; color: #f57c00; }
-    .level.avanzado { background: #fce4ec; color: #c2185b; }
+    .level.básico { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .level.intermedio { background: #fffbeb; color: #92400e; border: 1px solid #fef3c7; }
+    .level.avanzado { background: #fff1f2; color: #991b1b; border: 1px solid #fecdd3; }
 
     .instructor {
       font-size: 0.8rem;
       color: var(--formarka-text-muted);
+      font-weight: 500;
     }
 
     h3 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
       line-height: 1.3;
+      color: var(--formarka-text);
     }
 
     p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--formarka-text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
       flex-grow: 1;
+      line-height: 1.6;
     }
 
     .card-footer {

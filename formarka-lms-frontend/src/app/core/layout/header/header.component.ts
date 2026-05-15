@@ -42,10 +42,11 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
       height: var(--header-height);
       display: flex;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(128, 18, 246, 0.05);
       position: sticky;
       top: 0;
       z-index: 100;
+      font-family: var(--font-main);
     }
 
     .header-content {
@@ -57,27 +58,41 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 
     .logo-area {
       cursor: pointer;
+      display: flex;
+      align-items: center;
     }
 
     .logo {
-      height: 32px;
+      height: 40px;
     }
 
     .nav {
       display: flex;
-      gap: 30px;
+      gap: 32px;
     }
 
     .nav a {
       text-decoration: none;
       color: var(--formarka-text);
-      font-weight: 500;
-      transition: color 0.3s ease;
-      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      position: relative;
     }
 
     .nav a:hover, .nav a.active {
-      color: var(--formarka-accent);
+      color: var(--formarka-primary);
+    }
+
+    .nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--formarka-primary);
+      border-radius: 50px;
     }
 
     .user-area {
@@ -88,28 +103,32 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
     .user-profile {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
 
     .user-name {
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--formarka-text);
     }
 
     .avatar {
-      width: 36px;
-      height: 36px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      border: 2px solid var(--formarka-accent);
+      border: 2px solid var(--formarka-primary);
+      padding: 2px;
+      background: var(--formarka-white);
     }
 
     .logout-btn {
       background: none;
       border: none;
-      color: #e74c3c;
-      font-size: 0.8rem;
+      color: #ef4444;
+      font-size: 0.85rem;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      padding: 0;
     }
   `]
 })
