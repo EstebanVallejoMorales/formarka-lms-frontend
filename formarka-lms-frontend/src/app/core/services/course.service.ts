@@ -16,8 +16,8 @@ import { delay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CourseService {
-  // Mock data for the MVP
-  private mockCourses: Course[] = [
+  // Mock data for the MVP - Moved to a private member that can be modified
+  private _courses: Course[] = [
     {
       id: '1',
       title: 'Construye tu Marca desde Cero',
@@ -38,50 +38,11 @@ export class CourseService {
               type: 'video',
               contentUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
               duration: '05:20',
-              isCompleted: true, // This will be overwritten by progress tracking
+              isCompleted: true,
               resources: [
                 { id: 'r1', title: 'Guía de Branding PDF', url: '#', type: 'pdf' },
                 { id: 'r2', title: 'Plantillas de Diseño', url: '#', type: 'zip' }
               ]
-            },
-            {
-              id: 'l2',
-              title: 'Psicología del color',
-              type: 'video',
-              contentUrl: 'https://www.youtube.com/embed/fH_OnJk6QqU',
-              duration: '12:45'
-            },
-            {
-              id: 'l3',
-              title: 'Evaluación de Introducción',
-              type: 'quiz',
-              quiz: {
-                id: 'q1',
-                title: 'Quiz: Identidad Visual',
-                passingScore: 70,
-                questions: [
-                  {
-                    id: 'q1_1',
-                    text: '¿Cuál es el objetivo principal de una identidad visual?',
-                    options: [
-                      { id: 'a', text: 'Que se vea bonito' },
-                      { id: 'b', text: 'Transmitir los valores y personalidad de la marca' },
-                      { id: 'c', text: 'Copiar a la competencia' }
-                    ],
-                    correctOptionId: 'b'
-                  },
-                  {
-                    id: 'q1_2',
-                    text: '¿Qué sentimiento suele transmitir el color azul en diseño?',
-                    options: [
-                      { id: 'a', text: 'Peligro' },
-                      { id: 'b', text: 'Confianza y profesionalismo' },
-                      { id: 'c', text: 'Hambre' }
-                    ],
-                    correctOptionId: 'b'
-                  }
-                ]
-              }
             }
           ]
         }
@@ -110,41 +71,38 @@ export class CourseService {
   private PROGRESS_KEY = 'f-lms-progress';
   private LAST_ACTIVITY_KEY = 'f-lms-last-activity';
 
-  /**
-   * Fetches all courses, injecting current progress for each lesson.
-   */
   getCourses(): Observable<Course[]> {
-    console.log('Mock: Fetching all courses.');
-    // Simulate API call
-    // const API_ENDPOINT = '/api/courses'; // Example backend endpoint
-    // return this.http.get<Course[]>(API_ENDPOINT).pipe(
-    //   map(courses => this.injectProgress(courses)),
-    //   delay(500)
-    // );
-
-    const coursesWithProgress = this.injectProgress(this.mockCourses);
-    return of(coursesWithProgress).pipe(delay(500)); // Simulate network delay
+    return of(this.injectProgress(this._courses)).pipe(delay(400));
   }
 
-  /**
-   * Fetches a single course by ID, injecting its progress.
-   */
   getCourse(id: string): Observable<Course | undefined> {
-    console.log(`Mock: Fetching course with ID: ${id}`);
-    const course = this.mockCourses.find(c => c.id === id);
-    
-    // Simulate API call
-    // const API_ENDPOINT = `/api/courses/${id}`; // Example backend endpoint
-    // return this.http.get<Course>(API_ENDPOINT).pipe(
-    //   map(courseData => this.injectProgress([courseData])[0]),
-    //   delay(500)
-    // );
-
+    const course = this._courses.find(c => c.id === id);
     if (course) {
-      const courseWithProgress = this.injectProgress([course])[0];
-      return of(courseWithProgress).pipe(delay(500)); // Simulate network delay
+      return of(this.injectProgress([course])[0]).pipe(delay(300));
     }
-    return of(undefined).pipe(delay(500));
+    return of(undefined).pipe(delay(300));
+  }
+
+  // Course Management Logic
+  createCourse(course: Course): Observable<Course> {
+    const newCourse = { ...course, id: Math.random().toString(36).substring(2, 9) };
+    this._courses.push(newCourse);
+    return of(newCourse).pipe(delay(600));
+  }
+
+  updateCourse(id: string, course: Partial<Course>): Observable<Course | undefined> {
+    const index = this._courses.findIndex(c => c.id === id);
+    if (index !== -1) {
+      this._courses[index] = { ...this._courses[index], ...course };
+      return of(this._courses[index]).pipe(delay(600));
+    }
+    return of(undefined).pipe(delay(300));
+  }
+
+  deleteCourse(id: string): Observable<boolean> {
+    const initialLength = this._courses.length;
+    this._courses = this._courses.filter(c => c.id !== id);
+    return of(this._courses.length < initialLength).pipe(delay(500));
   }
 
   /**
@@ -177,7 +135,7 @@ export class CourseService {
    * Calculates the completion percentage for a given course.
    */
   getCourseProgress(courseId: string): number {
-    const course = this.mockCourses.find(c => c.id === courseId);
+    const course = this._courses.find(c => c.id === courseId);
     if (!course || !course.modules) return 0;
     
     let totalLessons = 0;

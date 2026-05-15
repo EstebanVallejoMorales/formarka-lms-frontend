@@ -33,13 +33,31 @@ import { HeaderComponent } from './header/header.component';
     }
 
     .footer {
-      background: var(--formarka-bg-dark);
+      background: var(--brand-black);
       color: var(--formarka-white);
-      padding: 48px 0;
+      padding: 60px 0;
       text-align: center;
-      font-size: 0.95rem;
-      border-top: 4px solid var(--formarka-primary);
+      font-size: 1rem;
+      border-top: 6px solid var(--brand-purple-deep);
       font-family: var(--font-main);
+      position: relative;
+    }
+
+    .footer p {
+      opacity: 0.8;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 0;
+      width: 40%;
+      height: 6px;
+      background: var(--brand-green-vibrant);
+      z-index: 2;
     }
   `]
 })

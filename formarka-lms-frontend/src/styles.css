@@ -1,18 +1,25 @@
 /* Formarka LMS - Brand Identity & Global Styles */
 :root {
-  /* Brand Colors - Formarka Style */
-  --formarka-primary: #8012f6;    /* Purple */
-  --formarka-secondary: #54f200;  /* Green */
-  --formarka-accent: #e3c505;     /* Gold/Yellow */
-  --formarka-bg-dark: #1a1a1a;
-  --formarka-bg-light: #f8f2ff;
-  --formarka-text: #2e2e2e;
-  --formarka-text-muted: #666666;
+  /* Exact Brand Colors */
+  --brand-black: #141414;
+  --brand-purple-deep: #4E0767;
+  --brand-purple-light: #CA63F0;
+  --brand-green-vibrant: #00D800;
+  --brand-green-olive: #739642;
+
+  /* Functional Mappings */
+  --formarka-primary: var(--brand-purple-deep);
+  --formarka-secondary: var(--brand-green-vibrant);
+  --formarka-accent: var(--brand-purple-light);
+  --formarka-bg-dark: var(--brand-black);
+  --formarka-bg-light: #fdfbff; /* Subtle tint for contrast */
+  --formarka-text: var(--brand-black);
+  --formarka-text-muted: #555555;
   --formarka-white: #ffffff;
   
   /* Layout */
   --sidebar-width: 300px;
-  --header-height: 72px;
+  --header-height: 80px;
   
   /* Fonts */
   --font-main: 'Plus Jakarta Sans', sans-serif;
@@ -30,17 +37,50 @@ body {
   color: var(--formarka-text);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
-  color: var(--formarka-text);
-  font-weight: 700;
-  line-height: 1.25;
+  color: var(--brand-black);
+  font-weight: 800;
+  line-height: 1.2;
 }
 
-/* Scrollbar styling for a modern look */
+/* Sophisticated Typography */
+.text-gradient {
+  background: linear-gradient(90deg, var(--brand-purple-deep), var(--brand-purple-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade {
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,18 +88,24 @@ h1, h2, h3, h4 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--formarka-primary);
-  border-radius: 5px;
-  border: 2px solid var(--formarka-bg-light);
+  background: var(--brand-purple-light);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6a0ed1;
+  background: var(--brand-purple-deep);
 }
 
-/* Utility classes */
+/* Global Container */
 .container {
-  max-width: 1240px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
