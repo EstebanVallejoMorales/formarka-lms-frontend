@@ -1,67 +1,64 @@
 import { Injectable, signal } from '@angular/core';
 import { User } from '../models/user.model';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 /**
  * Authentication Service
  * 
- * This service handles all authentication logic, including login, 
- * registration, and session management.
- * 
- * For beginners: A service in Angular is a class that provides 
- * functionality across different components.
- * 
- * NOTE: This service currently uses mock data for demonstration purposes.
- * In a production environment, these methods would use HttpClient
- * to communicate with a backend API for authentication.
+ * Handles authentication and user management for the LMS.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Using Angular Signals for efficient state management
+  // Mock users as requested: 2 admins, 2 teachers, 2 students
+  private _users: User[] = [
+    { id: 'a1', email: 'admin1@formarka.com', name: 'Esteban Administrador', role: 'admin' },
+    { id: 'a2', email: 'admin2@formarka.com', name: 'Laura Admin', role: 'admin' },
+    { id: 't1', email: 'profesor1@formarka.com', name: 'Luis Instructor', role: 'teacher', specialty: 'Diseño de Marca' },
+    { id: 't2', email: 'profesor2@formarka.com', name: 'Maria Experta', role: 'teacher', specialty: 'Marketing Digital' },
+    { id: 's1', email: 'alumno1@formarka.com', name: 'Juan Alumno', role: 'student', enrolledCourses: ['1'] },
+    { id: 's2', email: 'alumno2@formarka.com', name: 'Ana Estudiante', role: 'student', enrolledCourses: ['1', '2'] }
+  ];
+
   private currentUserSignal = signal<User | null>(null);
-  
-  // Public access to the user state
   readonly currentUser = this.currentUserSignal.asReadonly();
   readonly isAuthenticated = signal(false).asReadonly();
 
   constructor() {
-    // Check for existing session in localStorage
-    // In a real app, this would involve token validation with the backend.
     this.checkSession();
   }
 
   /**
    * Mock login method
-   * @param email User email
-   * @param password User password
    */
   login(email: string, password: string): Observable<User> {
     console.log('Mock login initiated with:', email);
     
-    // Simulate API call
-    // const API_ENDPOINT = '/api/auth/login'; // Example backend endpoint
-    // return this.http.post<User>(API_ENDPOINT, { email, password }).pipe(
-    //   tap(user => {
-    //     this.currentUserSignal.set(user);
-    //     localStorage.setItem('f-lms-token', 'mock-jwt-token'); // Store mock token
-    //   })
+    // BACKEND REQUEST (Commented out):
+    // return this.http.post<User>('/api/auth/login', { email, password }).pipe(
+    //   tap(user => this.setCurrentUser(user))
     // );
 
-    const isSpecialAdmin = email === 'admin@formarka.com';
-    const mockUser: User = {
-      id: isSpecialAdmin ? '99' : '1',
-      email: email,
-      name: isSpecialAdmin ? 'Admin Formarka' : 'Usuario Demo',
-      role: isSpecialAdmin ? 'admin' : 'student'
-    };
+    const user = this._users.find(u => u.email === email);
+    if (user) {
+      this.setCurrentUser(user);
+      return of(user).pipe(delay(800));
+    }
+    throw new Error('Credenciales inválidas');
+  }
 
-    this.currentUserSignal.set(mockUser);
-    // In a real app, you would receive and store a JWT from the backend.
-    localStorage.setItem('f-lms-token', 'mock-jwt-token'); 
-    return of(mockUser).pipe(delay(1000)); // Simulate network delay
+  private setCurrentUser(user: User): void {
+    this.currentUserSignal.set(user);
+    localStorage.setItem('f-lms-token', 'mock-jwt-' + user.id);
+    localStorage.setItem('f-lms-user', JSON.stringify(user));
+  }
+
+  logout(): void {
+    this.currentUserSignal.set(null);
+    localStorage.removeItem('f-lms-token');
+    localStorage.removeItem('f-lms-user');
   }
 
   /**
@@ -70,56 +67,62 @@ export class AuthService {
   register(userData: any): Observable<User> {
     console.log('Mock registration initiated with:', userData.email);
     
-    // Simulate API call
-    // const API_ENDPOINT = '/api/auth/register'; // Example backend endpoint
-    // return this.http.post<User>(API_ENDPOINT, userData).pipe(
-    //   tap(user => {
-    //     this.currentUserSignal.set(user);
-    //     localStorage.setItem('f-lms-token', 'mock-jwt-token'); // Store mock token
-    //   })
+    // BACKEND REQUEST (Commented out):
+    // return this.http.post<User>('/api/auth/register', userData).pipe(
+    //   tap(user => this.setCurrentUser(user))
     // );
 
-    const mockUser: User = {
-      id: '2',
+    const newUser: User = {
+      id: Math.random().toString(36).substring(2, 9),
       email: userData.email,
       name: userData.name,
-      role: 'student' // Default role for new users
+      role: 'student',
+      enrolledCourses: []
     };
-    // In a real app, you would receive and store a JWT from the backend.
-    localStorage.setItem('f-lms-token', 'mock-jwt-token');
-    return of(mockUser).pipe(delay(1000)); // Simulate network delay
+    
+    this._users.push(newUser);
+    this.setCurrentUser(newUser);
+    return of(newUser).pipe(delay(1000));
   }
 
   /**
-   * Logout the current user
+   * ADMIN METHODS: User Management
    */
-  logout(): void {
-    console.log('Logging out user.');
-    this.currentUserSignal.set(null);
-    // In a real app, this would also involve invalidating the token on the backend.
-    localStorage.removeItem('f-lms-token');
+  getUsers(): Observable<User[]> {
+    // BACKEND REQUEST (Commented out):
+    // return this.http.get<User[]>('/api/admin/users');
+    return of(this._users).pipe(delay(500));
   }
 
-  /**
-   * Checks for an existing session (simulated via localStorage).
-   * In a real application, this would involve validating a token with the backend.
-   */
+  addUser(user: User): Observable<User> {
+    // BACKEND REQUEST (Commented out):
+    // return this.http.post<User>('/api/admin/users', user);
+    this._users.push(user);
+    return of(user).pipe(delay(500));
+  }
+
+  updateUser(id: string, userData: Partial<User>): Observable<User> {
+    // BACKEND REQUEST (Commented out):
+    // return this.http.put<User>(`/api/admin/users/${id}`, userData);
+    const index = this._users.findIndex(u => u.id === id);
+    if (index !== -1) {
+      this._users[index] = { ...this._users[index], ...userData };
+      return of(this._users[index]).pipe(delay(500));
+    }
+    throw new Error('User not found');
+  }
+
+  deleteUser(id: string): Observable<boolean> {
+    // BACKEND REQUEST (Commented out):
+    // return this.http.delete<boolean>(`/api/admin/users/${id}`);
+    this._users = this._users.filter(u => u.id !== id);
+    return of(true).pipe(delay(500));
+  }
+
   private checkSession(): void {
-    const token = localStorage.getItem('f-lms-token');
-    if (token) {
-      // Simulate fetching user data based on the token
-      // In a real app, you would call an API like '/api/auth/me'
-      // this.http.get<User>('/api/auth/me').subscribe(user => {
-      //   this.currentUserSignal.set(user);
-      // });
-      
-      // Mock user data if token exists
-      this.currentUserSignal.set({
-        id: '1',
-        email: 'demo@formarka.com',
-        name: 'Demo User',
-        role: 'student' 
-      });
+    const savedUser = localStorage.getItem('f-lms-user');
+    if (savedUser) {
+      this.currentUserSignal.set(JSON.parse(savedUser));
     }
   }
 }

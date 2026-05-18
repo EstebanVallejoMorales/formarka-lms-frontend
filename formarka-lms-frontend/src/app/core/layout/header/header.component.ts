@@ -18,7 +18,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
         <nav class="nav">
           <a routerLink="/courses" routerLinkActive="active">Catálogo</a>
           <a routerLink="/my-courses" routerLinkActive="active" *ngIf="authService.currentUser()">Mis Cursos</a>
-          <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.currentUser()?.role === 'admin'">Administración</a>
+          <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.currentUser()?.role === 'admin' || authService.currentUser()?.role === 'teacher'">Administración</a>
         </nav>
 
         <div class="user-area">
