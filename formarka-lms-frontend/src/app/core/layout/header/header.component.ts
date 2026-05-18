@@ -40,7 +40,8 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
     .header {
       background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(15px);
-      height: var(--header-height);
+      height: auto;
+      min-height: 120px;
       display: flex;
       align-items: center;
       box-shadow: 0 4px 20px rgba(78, 7, 103, 0.05);
@@ -49,6 +50,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
       z-index: 1000;
       font-family: var(--font-main);
       border-bottom: 1px solid rgba(78, 7, 103, 0.05);
+      padding: 12px 0;
     }
 
     .header-content {
@@ -70,7 +72,9 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
     }
 
     .logo {
-      height: 48px;
+      height: 100px;
+      width: auto;
+      object-fit: contain;
     }
 
     .nav {
@@ -132,8 +136,8 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
     }
 
     .avatar {
-      width: 44px;
-      height: 44px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       border: 2.5px solid var(--brand-purple-light);
       background: var(--formarka-white);
