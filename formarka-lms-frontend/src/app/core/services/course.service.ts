@@ -87,7 +87,7 @@ export class CourseService {
               "duration": "09:15",
               "isCompleted": false,
               "resources": [
-                { "id": "r2_1", "title": "Color profesional", "url": "https://drive.google.com/file/d/example3/view", "type": "pdf" }
+                { "id": "r2_1", "title": "Color profesional", "url": "https://drive.google.com/file/d/1vNoaI4kSh5O7p5y5v_1R1cW-6kCgT4rb/view?usp=sharing", "type": "pdf" }
               ]
             },
             {
@@ -132,7 +132,7 @@ export class CourseService {
               "duration": "07:40",
               "isCompleted": false,
               "resources": [
-                { "id": "r3_1", "title": "Tipografía Pro", "url": "https://drive.google.com/file/d/example5/view", "type": "pdf" }
+                { "id": "r3_1", "title": "Tipografía Pro", "url": "https://drive.google.com/file/d/1jGzVjXz7eE0eSX73o5AaY3KfriTxt34q/view?usp=sharing", "type": "pdf" }
               ]
             },
             {
