@@ -15,50 +15,151 @@ export class CourseService {
   // Enhanced mock data
   private _courses: Course[] = [
     {
-      id: '1',
-      title: 'Construye tu Marca desde Cero',
-      description: 'Aprende los fundamentos del diseño de marca para emprendedores.',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800',
-      category: 'Diseño',
-      level: 'básico',
-      instructorName: 'Profe Luis',
-      instructorId: 't1',
-      totalHours: 20,
-      enrolledStudents: [
-        { studentId: 's1', studentName: 'Estudiante Juan', progress: 100, grade: 95, completedDate: '2026-05-01' },
-        { studentId: 's2', studentName: 'Estudiante Ana', progress: 45 }
+      "id": "1",
+      "title": "Construye tu Marca desde Cero",
+      "description": "Aprende los fundamentos del diseño de marca para emprendedores.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800",
+      "category": "Diseño",
+      "level": "básico",
+      "instructorName": "Profe Luis",
+      "instructorId": "t1",
+      "totalHours": 20,
+      "enrolledStudents": [
+        { "studentId": "s1", "studentName": "Estudiante Juan", "progress": 100, "grade": 95, "completedDate": "2026-05-01" },
+        { "studentId": "s2", "studentName": "Estudiante Ana", "progress": 45 }
       ],
-      modules: [
+      "modules": [
         {
-          id: 'm1',
-          title: 'Módulo 1: Estrategia de marca',
-          isOpen: true,
-          lessons: [
+          "id": "m1",
+          "title": "Módulo 1: Estrategia de marca",
+          "isOpen": true,
+          "lessons": [
             {
-              id: 'l1_1',
-              title: 'Introducción al ADN de Marca',
-              type: 'video',
-              contentUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-              duration: '08:45',
-              isCompleted: true,
-              resources: [
-                { id: 'r1_1', title: 'Aspectos clave de la estrategia de marca', url: 'https://drive.google.com/file/d/1-fx3U_cBvjL_Jo33joe45qldqXkjPOYe/view?usp=sharing', type: 'pdf' }
+              "id": "l1_1",
+              "title": "Introducción al ADN de Marca",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "08:45",
+              "isCompleted": true,
+              "resources": [
+                { "id": "r1_1", "title": "Aspectos clave de la estrategia de marca", "url": "https://drive.google.com/file/d/1-fx3U_cBvjL_Jo33joe45qldqXkjPOYe/view?usp=sharing", "type": "pdf" }
               ]
             },
             {
-              id: 'l1_2',
-              title: 'Entregable: Definición de Buyer Persona',
-              type: 'deliverable',
-              duration: '30:00',
-              isCompleted: false,
-              deliverable: {
-                id: 'd1',
-                studentId: 's1',
-                courseId: '1',
-                lessonId: 'l1_2',
-                contentUrl: 'https://example.com/submission.pdf',
-                submissionDate: '2026-05-10',
-                status: 'pending'
+              "id": "l1_2",
+              "title": "Entregable: Definición de Buyer Persona",
+              "type": "deliverable",
+              "duration": "30:00",
+              "isCompleted": false,
+              "deliverable": {
+                "id": "d1",
+                "studentId": "s1",
+                "courseId": "1",
+                "lessonId": "l1_2",
+                "contentUrl": "https://example.com/submission.pdf",
+                "submissionDate": "2026-05-10",
+                "status": "pending"
+              }
+            },
+            {
+              "id": "l1_3",
+              "title": "Propuesta de Valor y Ventaja Competitiva",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "10:15",
+              "isCompleted": false,
+              "resources": [
+                { "id": "r1_3", "title": "Cuadrante de Posicionamiento de Mercado", "url": "https://drive.google.com/file/d/example2/view", "type": "pdf" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m2",
+          "title": "Módulo 2: Uso correcto del color",
+          "isOpen": false,
+          "lessons": [
+            {
+              "id": "l2_1",
+              "title": "Psicología y Teoría del Color en Branding",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "09:15",
+              "isCompleted": false,
+              "resources": [
+                { "id": "r2_1", "title": "Color profesional", "url": "https://drive.google.com/file/d/example3/view", "type": "pdf" }
+              ]
+            },
+            {
+              "id": "l2_2",
+              "title": "Cómo crear Paletas Cromáticas Armónicas",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "14:20",
+              "isCompleted": false,
+              "resources": [
+                { "id": "r2_2", "title": "Guía de Combinaciones y Círculo Cromático", "url": "https://drive.google.com/file/d/example4/view", "type": "pdf" }
+              ]
+            },
+            {
+              "id": "l2_3",
+              "title": "Entregable: Diseño de la Paleta Cromática",
+              "type": "deliverable",
+              "duration": "45:00",
+              "isCompleted": false,
+              "deliverable": {
+                "id": "d2",
+                "studentId": "s2",
+                "courseId": "1",
+                "lessonId": "l2_3",
+                "contentUrl": "https://example.com/palette_submission.pdf",
+                "submissionDate": "2026-05-15",
+                "status": "graded"
+              }
+            }
+          ]
+        },
+        {
+          "id": "m3",
+          "title": "Módulo 3: Tipografía",
+          "isOpen": false,
+          "lessons": [
+            {
+              "id": "l3_1",
+              "title": "Clasificación y Anatomía Tipográfica",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "07:40",
+              "isCompleted": false,
+              "resources": [
+                { "id": "r3_1", "title": "Tipografía Pro", "url": "https://drive.google.com/file/d/example5/view", "type": "pdf" }
+              ]
+            },
+            {
+              "id": "l3_2",
+              "title": "Maridaje Tipográfico: Combinación con Éxito",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "13:10",
+              "isCompleted": false,
+              "resources": [
+                { "id": "r3_2", "title": "Manual de Jerarquías Visuales", "url": "https://drive.google.com/file/d/example6/view", "type": "pdf" }
+              ]
+            },
+            {
+              "id": "l3_3",
+              "title": "Entregable: Definición del Sistema Tipográfico",
+              "type": "deliverable",
+              "duration": "40:00",
+              "isCompleted": false,
+              "deliverable": {
+                "id": "d3",
+                "studentId": "s1",
+                "courseId": "1",
+                "lessonId": "l3_3",
+                "contentUrl": "",
+                "submissionDate": "",
+                "status": "pending"
               }
             }
           ]
@@ -66,19 +167,104 @@ export class CourseService {
       ]
     },
     {
-      id: '2',
-      title: 'Estrategia de Contenido para Redes',
-      description: 'Cómo crear contenido que conecte con tu audiencia.',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800',
-      category: 'Marketing',
-      level: 'intermedio',
-      instructorName: 'Profe Maria',
-      instructorId: 't2',
-      totalHours: 15,
-      enrolledStudents: [
-        { studentId: 's2', studentName: 'Estudiante Ana', progress: 10 }
+      "id": "2",
+      "title": "Estrategia de Contenido para Redes",
+      "description": "Cómo crear contenido que conecte con tu audiencia.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800",
+      "category": "Marketing",
+      "level": "intermedio",
+      "instructorName": "Profe Maria",
+      "instructorId": "t2",
+      "totalHours": 15,
+      "enrolledStudents": [
+        { "studentId": "s2", "studentName": "Estudiante Ana", "progress": 10 }
       ],
-      modules: []
+      "modules": [
+        {
+          "id": "m2_1",
+          "title": "Módulo 1: Planificación y Calendario Editorial",
+          "isOpen": true,
+          "lessons": [
+            {
+              "id": "l2_1_1",
+              "title": "Definición de Pilares de Contenido",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "11:15",
+              "isCompleted": false,
+              "resources": [
+                { "id": "r2_1_1", "title": "Matriz de Contenidos XLS", "url": "https://drive.google.com/file/d/example7/view", "type": "excel" }
+              ]
+            },
+            {
+              "id": "l2_1_2",
+              "title": "Entregable: Calendario Mensual de Redes",
+              "type": "deliverable",
+              "duration": "60:00",
+              "isCompleted": false,
+              "deliverable": {
+                "id": "d4",
+                "studentId": "s2",
+                "courseId": "2",
+                "lessonId": "l2_1_2",
+                "contentUrl": "https://example.com/calendar_design.pdf",
+                "submissionDate": "2026-05-12",
+                "status": "pending"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Fotografía de Producto con Celular",
+      "description": "Haz que tus productos luzcan profesionales con tu smartphone.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800",
+      "category": "Fotografía",
+      "level": "básico",
+      "instructorName": "Profe Lucas",
+      "instructorId": "t3",
+      "totalHours": 12,
+      "enrolledStudents": [
+        { "studentId": "s1", "studentName": "Estudiante Juan", "progress": 20 }
+      ],
+      "modules": [
+        {
+          "id": "m3_1",
+          "title": "Módulo 1: Iluminación Casera Avanzada",
+          "isOpen": true,
+          "lessons": [
+            {
+              "id": "l3_1_1",
+              "title": "Dominando la Luz Natural de Ventana",
+              "type": "video",
+              "contentUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              "duration": "09:50",
+              "isCompleted": false,
+              "resources": [
+                { "id": "r3_1_1", "title": "Guía de Esquemas de Iluminación", "url": "https://drive.google.com/file/d/example8/view", "type": "pdf" }
+              ]
+            },
+            {
+              "id": "l3_1_2",
+              "title": "Entregable: Set de Iluminación DIY",
+              "type": "deliverable",
+              "duration": "45:00",
+              "isCompleted": false,
+              "deliverable": {
+                "id": "d5",
+                "studentId": "s1",
+                "courseId": "3",
+                "lessonId": "l3_1_2",
+                "contentUrl": "",
+                "submissionDate": "",
+                "status": "pending"
+              }
+            }
+          ]
+        }
+      ]
     }
   ];
 
@@ -138,7 +324,7 @@ export class CourseService {
   gradeDeliverable(courseId: string, studentId: string, grade: number, feedback: string): Observable<boolean> {
     // BACKEND REQUEST: 
     // return this.http.post<boolean>(`/api/courses/${courseId}/students/${studentId}/grade`, { grade, feedback });
-    
+
     console.log(`Mock: Grading student ${studentId} in course ${courseId} with ${grade}`);
     const course = this._courses.find(c => c.id === courseId);
     if (course && course.enrolledStudents) {
@@ -155,7 +341,7 @@ export class CourseService {
   uploadResource(courseId: string, lessonId: string, resource: Resource): Observable<Resource> {
     // BACKEND REQUEST: 
     // return this.http.post<Resource>(`/api/courses/${courseId}/lessons/${lessonId}/resources`, resource);
-    
+
     console.log(`Mock: Uploading resource to lesson ${lessonId} in course ${courseId}`);
     const course = this._courses.find(c => c.id === courseId);
     if (course && course.modules) {
@@ -192,7 +378,7 @@ export class CourseService {
   enroll(courseId: string): Observable<boolean> {
     console.log(`Mock: Enrolling in course: ${courseId}`);
     // BACKEND REQUEST: return this.http.post<boolean>('/api/learning/enroll', { courseId });
-    
+
     const course = this._courses.find(c => c.id === courseId);
     if (course) {
       if (!course.enrolledStudents) course.enrolledStudents = [];

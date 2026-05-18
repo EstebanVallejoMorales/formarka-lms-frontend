@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { User } from '../models/user.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
 /**
@@ -46,7 +46,7 @@ export class AuthService {
       this.setCurrentUser(user);
       return of(user).pipe(delay(800));
     }
-    throw new Error('Credenciales inválidas');
+    return throwError(() => new Error('Credenciales inválidas'));
   }
 
   private setCurrentUser(user: User): void {

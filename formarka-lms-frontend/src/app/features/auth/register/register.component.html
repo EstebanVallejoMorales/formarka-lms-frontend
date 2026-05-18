@@ -1,7 +1,7 @@
 <div class="auth-container">
   <div class="auth-card">
     <div class="auth-header">
-      <img src="assets/logo.png" alt="Formarka Logo" class="logo" onerror="this.src='https://via.placeholder.com/150x50?text=FORMARKA'">
+      <img src="logo.png" alt="Formarka Logo" class="logo" onerror="this.src='https://via.placeholder.com/150x50?text=FORMARKA'">
       <h1>Crea tu cuenta</h1>
       <p>Únete a la comunidad de Formarka y empieza a aprender</p>
     </div>
@@ -51,6 +51,16 @@
 
     <div class="auth-footer">
       <p>¿Ya tienes una cuenta? <a routerLink="/auth/login">Inicia sesión</a></p>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div class="modal-overlay" *ngIf="showErrorModal">
+    <div class="modal-card">
+      <span class="modal-icon">⚠️</span>
+      <h2>¡Ups! Algo salió mal</h2>
+      <p>{{ errorMessage }}</p>
+      <app-button (click)="closeErrorModal()">Entendido</app-button>
     </div>
   </div>
 </div>

@@ -32,6 +32,8 @@ import { FormFieldComponent } from '../../../shared/components/form-field/form-f
 export class LoginComponent {
   loginForm: FormGroup;
   isLoading = false;
+  showErrorModal = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -68,14 +70,17 @@ export class LoginComponent {
         },
         error: (err) => {
           this.isLoading = false;
-          console.error('Error en login:', err);
-          // Here you would show an error message to the user
-          alert('Error al iniciar sesión. Por favor verifica tus credenciales.');
+          this.errorMessage = err.message || 'Error al iniciar sesión. Por favor verifica tus credenciales.';
+          this.showErrorModal = true;
         }
       });
     } else {
       // Mark all fields as touched to show validation errors
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  closeErrorModal(): void {
+    this.showErrorModal = false;
   }
 }

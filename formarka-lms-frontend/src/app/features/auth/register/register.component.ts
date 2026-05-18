@@ -22,6 +22,8 @@ import { FormFieldComponent } from '../../../shared/components/form-field/form-f
 export class RegisterComponent {
   registerForm: FormGroup;
   isLoading = false;
+  showErrorModal = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -60,12 +62,16 @@ export class RegisterComponent {
         },
         error: (err) => {
           this.isLoading = false;
-          console.error('Error en registro:', err);
-          alert('Error al crear la cuenta. Inténtalo de nuevo.');
+          this.errorMessage = err.message || 'Error al crear la cuenta. Inténtalo de nuevo.';
+          this.showErrorModal = true;
         }
       });
     } else {
       this.registerForm.markAllAsTouched();
     }
+  }
+
+  closeErrorModal(): void {
+    this.showErrorModal = false;
   }
 }
